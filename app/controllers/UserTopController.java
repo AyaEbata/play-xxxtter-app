@@ -42,6 +42,7 @@ public class UserTopController extends Controller {
         // こっち、フォローしたとき
         if ("".equals(dForm.data().get("followJudge"))) {
             if (userInfo.follow != null) {
+                // これ、ここに書くの微妙（下にも同じのあるから）
                 List<String> followList = new ArrayList<>(Arrays.asList(userInfo.follow.split(",", 0)));
 
                 followList.add(dForm.data().get("userId"));
