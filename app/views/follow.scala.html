@@ -35,7 +35,7 @@
         <div class="col-md-7">
             <h1>
                 @@@userId のツイート
-                <form action="@routes.UserTopController.follow" method="POST" class="formButton">
+                <form action="@routes.UserTopController.clickFollowButton" method="POST" class="formButton">
                     <button class="btn btn-default follow">フォロー</button>
                     <input type="hidden" name="userId" value="@userId" />
                     <input type="hidden" name="followJudge" id="followJudge" value="@followFlg" />

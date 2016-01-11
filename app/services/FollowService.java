@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class FollowListService {
+public class FollowService {
 
     /**
      * ユーザIDからフォローリスト抽出.
@@ -33,8 +33,8 @@ public class FollowListService {
      * @param userId 表示しているuserId
      * @return フォローしてるかどうか（フォローしてたらfollowってかえす）
      */
-    public String followChack(String sessionUserId, String userId) {
-        FollowListService fs = new FollowListService();
+    public String followCheck(String sessionUserId, String userId) {
+        FollowService fs = new FollowService();
 
         for (String f : fs.getFollowList(sessionUserId)) {
             if (f.equals(userId)) {

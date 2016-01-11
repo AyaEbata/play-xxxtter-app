@@ -12,7 +12,7 @@ public class TopController extends Controller {
 
     /**
      * ツイートリストの表示.
-     * @return viewに渡すツイートリスト
+     * @return TOP画面
      */
     @Security.Authenticated(Secured.class)
     public Result showTop() {
@@ -27,10 +27,10 @@ public class TopController extends Controller {
     @Security.Authenticated(Secured.class)
     public Result saveTweet() {
         String[] params = {"tweet"};
-        DynamicForm input = Form.form().bindFromRequest(params);
+        DynamicForm dForm = Form.form().bindFromRequest(params);
 
         Tweet tw = new Tweet();
-        tw.tweet = input.data().get("tweet");
+        tw.tweet = dForm.data().get("tweet");
         tw.userId = session().get("userId");
         tw.save();
 

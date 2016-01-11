@@ -11,12 +11,12 @@ public class LoginController extends Controller {
 
     /**
      * ログイン画面の表示.
-     * @return ログイン画面の表示
+     * @return ログイン画面
      */
     public Result showLogin() {
-        String userId = ctx().session().get("userId");
+        String sessionUserId = ctx().session().get("userId");
 
-        if (userId != null) {
+        if (sessionUserId != null) {
             return redirect("/top");
         }
 
@@ -29,14 +29,14 @@ public class LoginController extends Controller {
      */
     public Result login() {
         String[] params = {"userId", "password"};
-        DynamicForm input = Form.form().bindFromRequest(params);
+        DynamicForm dForm = Form.form().bindFromRequest(params);
 
         LoginService ls = new LoginService();
-        String pathStr = ls.loginJudge(input);
+        String pathStr = ls.loginJudge(dForm);
 
         if (pathStr.equals("/top")) {
             session().clear();
-            session("userId", input.data().get("userId"));
+            session("userId", dForm.data().get("userId"));
         }
 
         return redirect(pathStr);

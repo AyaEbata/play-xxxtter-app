@@ -20,13 +20,13 @@ public class RegistrationController extends Controller {
      * ユーザ登録機能.
      * @return ログイン画面
      */
-    public Result registration() {
+    public Result userRegistration() {
         String[] params = {"userId", "password"};
-        DynamicForm input = Form.form().bindFromRequest(params);
+        DynamicForm dForm = Form.form().bindFromRequest(params);
 
         User user = new User();
-        user.userId = input.data().get("userId");
-        user.password = input.data().get("password");
+        user.userId = dForm.data().get("userId");
+        user.password = dForm.data().get("password");
         user.save();
 
         return ok(login.render());

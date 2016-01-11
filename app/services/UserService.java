@@ -5,11 +5,11 @@ import models.User;
 
 import java.util.List;
 
-public class UserTweetService {
+public class UserService {
 
     /**
      * ユーザで絞ったツイート
-     * @param user userID
+     * @param userId ユーザID
      * @return ツイートリスト
      */
     public List<Tweet> getUserTweetList(String userId) {
@@ -19,5 +19,18 @@ public class UserTweetService {
                 .findList();
 
         return tweetList;
+    }
+
+    /**
+     * 指定したユーザ情報.
+     * @param userId ユーザID
+     * @return ユーザ情報
+     */
+    public User userInfo(String userId) {
+        User userInfo = User.find.where()
+                .eq("userId", userId)
+                .findUnique();
+
+        return userInfo;
     }
 }
