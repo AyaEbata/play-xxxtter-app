@@ -1,0 +1,53 @@
+.top {
+    margin-top: 60px;
+}
+
+#icon {
+    float: left;
+    height: 33px;
+    margin-right: 10px;
+}
+
+.time {
+    color: gray;
+    margin-left: 18px;
+    margin-right: 25px;
+}
+
+#login-form {
+    width: 300px;
+}
+
+#login-form input {
+    margin-bottom: 10px;
+}
+
+.formButton {
+    float: right;
+}
+
+.navButton {
+    margin-top: 8px;
+}
+
+#new-button {
+    margin-left: 15px;
+    margin-top: -8px;
+}
+
+.navbar-inverse {
+    background-color: white;
+    border-color: silver;
+}
+
+.menu {
+    margin: 15px 0;
+}
+
+.navbar-inverse .navbar-brand, .navbar-inverse .navbar-nav>li>a {
+    color: #333;
+}
+
+.navbar-inverse .navbar-brand:hover, .navbar-inverse .navbar-nav>li>a:hover {
+    color: #337ab7;
+}

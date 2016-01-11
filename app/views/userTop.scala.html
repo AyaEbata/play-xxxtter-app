@@ -1,0 +1,59 @@
+@(tweets: java.util.List[Tweet], follow: String)
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>@@@tweets.get(0).userId｜Twitterもどき</title>
+
+    <script src="@routes.Assets.versioned("javascripts/jquery-1.11.3.min.js")" type="text/javascript"></script>
+    <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("bootstrap-3.3.6-dist/css/bootstrap.min.css")">
+    <script src="@routes.Assets.versioned("bootstrap-3.3.6-dist/js/bootstrap.min.js")" type="text/javascript"></script>
+
+    <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("stylesheets/main.css")">
+    <link rel="shortcut icon" type="image/png" href="@routes.Assets.versioned("images/favicon.png")">
+    <script src="@routes.Assets.versioned("javascripts/main.js")" type="text/javascript"></script>
+</head>
+<body class="top">
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/top">偽Twitter</a>
+            </div>
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-9">
+                <ul class="nav navbar-nav">
+                    <li><a href="">通知</a></li>
+                    <li><a href="">メッセージ</a></li>
+                </ul>
+                <form action="@routes.TopController.logout" class="formButton navButton">
+                    <button class="btn btn-default">logout</button>
+                </form>
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="col-md-7">
+            <h1>
+                @@@tweets.get(0).userId のツイート
+                <form action="@routes.UserTopController.follow" method="POST" class="formButton">
+                    <button class="btn btn-default follow">フォロー</button>
+                    <input type="hidden" name="userId" value="@tweets.get(0).userId" />
+                    <input type="hidden" name="followJudge" id="followJudge" value="@follow" />
+                </form>
+            </h1>
+            <ul class="nav nav-tabs userNav menu">
+                <li role="presentation" class="active"><a href="/userTop/@tweets.get(0).userId">ツイート</a></li>
+                <li role="presentation"><a href="/userTop/@tweets.get(0).userId/follow">フォロー</a></li>
+                <li role="presentation"><a href="#">フォロワー</a></li>
+            </ul>
+            <ul class="list-group">
+                @for(tweet <- tweets) {
+                    <li class="list-group-item">
+                        <a href="/userTop/@tweet.userId">@@@tweet.userId</a><span class="time">@tweet.createdDate.format("yyyy/MM/dd HH:mm")</span>@tweet.tweet
+                    </li>
+                }
+            </ul>
+        </div>
+    </div>
+</body>
+</html>
