@@ -16,11 +16,25 @@ $(window).load(function() {
 //        $('.userNav li').removeClass('active');
 //        $('.menu li:nth-child(3)').addClass('active');
     }
+
+    /* 「ホーム」ボタンの下の線 */
+    if (location.href == 'http://localhost:9000/top') {
+        $('.navbar-home').css({
+                'border-bottom': 'solid 5px #337ab7',
+                'height': '50px'
+        });
+    }
 });
 
 
 /* ツイートの取得 */
-setInterval("tweetListAjax()",5000);
+var tweetHtml;
+setInterval("tweetListAjax()", 1000);
+
+$(document).on('click', '.new', function(){
+    $('.tweet-list-area').html(tweetHtml);
+    $('#maru').remove();
+});
 
 function tweetListAjax() {
     $.ajax({
@@ -28,21 +42,18 @@ function tweetListAjax() {
         type: 'GET',
 
     }).success(function(data){
+        tweetHtml = $(data).find('.tweet-list-area').html();
+
         var myListLength = $('.tweet-list-area li').length;
         var ajaxListLength = $(data).find('.tweet-list-area li').length;
 
-        // ちょっと保留（新着のお知らせ的な感じに出るやつ）
-//        if (myListLength < ajaxListLength && $('.new').length < 1) {
-//            var test = $('.tweet-list-area').html();
-//            $('.tweet-list-area').prepend('<li class="list-group-item new">新着ツイートを表示</li>');
-//        }
-//
-//        $('.new').click(function() {
-            var tweetHtml = $(data).find('.tweet-list-area').html();
-            $('.tweet-list-area').html(tweetHtml);
-//        });
+        if (myListLength < ajaxListLength && $('.new').length == 0 && myListLength != 0) {
+            var test = $('.tweet-list-area').html();
+            $('.tweet-list-area').prepend('<li class="list-group-item new">新着ツイートを表示</li>');
+            $('.navbar-home').prepend('<p id="maru">●</p>');
+        }
 
     }).error(function(data){
-        alert('error!!!');
+        console.log('error!!!');
     });
 }

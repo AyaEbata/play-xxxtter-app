@@ -61,3 +61,14 @@
 .new:hover {
     color: gray;
 }
+
+#maru {
+    position: fixed;
+    top: 3px;
+    left: 15px;
+    color: #337ab7;
+}
+
+.space-right {
+    margin-right: 5px;
+}
