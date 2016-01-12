@@ -43,7 +43,7 @@
                     </span>
                 </form>
             </div>
-            <ul class="list-group">
+            <ul class="list-group tweet-list-area">
                 @for(tweet <- tweets) {
                     <li class="list-group-item">
                         <a href="/userTop/@tweet.userId">@@@tweet.userId</a><span class="time">@tweet.createdDate.format("yyyy/MM/dd HH:mm")</span>@tweet.tweet
