@@ -17,12 +17,16 @@ $(window).load(function() {
 //        $('.menu li:nth-child(3)').addClass('active');
     }
 
-    /* 「ホーム」ボタンの下の線 */
     if (location.href == 'http://localhost:9000/top') {
+        /* 「ホーム」ボタンの下の線 */
         $('.navbar-home').css({
                 'border-bottom': 'solid 5px #337ab7',
                 'height': '50px'
         });
+
+        /* ツイート中に@userIdがあったらリンクに置き換え */
+        var test = $('.tweet-list-area').html();
+        $('.tweet-list-area').html(test.replace(/@(\w+)\s/g, '<a href="/userTop/$1">@$1</a> '));
     }
 });
 
@@ -57,3 +61,28 @@ function tweetListAjax() {
         console.log('error!!!');
     });
 }
+
+
+/* リプ用のフォーム */
+$(document).on('click', '.tweet-list-area > li', function(){
+    $('.reply').remove();
+    var userId = $(this).find('a').eq(0).text();
+    $(this).append('<form action="/top" method="POST" class="input-group reply">'
+            + '<input type="text" name="tweet" class="form-control" placeholder="' + userId + 'さんへの返信" value="" />'
+            + '<span class="input-group-btn">'
+            + '<input type="submit" class="btn btn-default" value="ていっ！" />'
+            + '</span>'
+            + '</form>');
+    $('.reply > input:visible').first().focus();
+});
+
+/* １文字目はひらがなか英語だけしかいけないかもしれない */
+// TODO: ！！改良しろ！！
+$(document).on('keyup', '.tweet-list-area > li input', function(key){
+    if(key.keyCode != 8){
+        var userId = $(this).parents('li').find('a').eq(0).text();
+            if ($(this).val().length < userId.length + 2) {
+                $(this).val(userId + ' ' + $(this).val());
+        }
+    }
+});

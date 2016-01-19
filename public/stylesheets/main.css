@@ -53,13 +53,8 @@
 }
 
 .new {
-    cursor: pointer;
     text-align: center;
     color: #337ab7;
-}
-
-.new:hover {
-    color: gray;
 }
 
 #maru {
@@ -71,4 +66,16 @@
 
 .space-right {
     margin-right: 5px;
+}
+
+.tweet-list-area {
+    cursor: pointer;
+}
+
+.tweet-list-area li:hover {
+    background-color: #eee;
+}
+
+.reply {
+    margin: 20px auto 5px 50px;
 }
