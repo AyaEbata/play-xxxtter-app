@@ -12,3 +12,5 @@ project/target
 tmp
 dist
 .cache
+
+hs_err_pid5467.log
